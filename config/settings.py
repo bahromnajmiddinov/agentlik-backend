@@ -27,7 +27,7 @@ SECRET_KEY = 'django-insecure-88vp$+70rq&!ru!p+y06*v#2s=he6iyjhc6u!$7vc*bc-zl2y1
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['agentlik-backend.onrender.com']
 
 
 # Application definition
@@ -87,11 +87,14 @@ WSGI_APPLICATION = 'config.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+        'ENGINE': 'django.db.backends.postgresql',
+        'NAME': 'agentlikdb',
+        'USER': 'agentlik',
+        'PASSWORD': 'nlw3jWGxJkNqR3wTxVoeiS3DmWUz6Qj8',
+        'HOST': 'dpg-cs3rvkogph6c73c72p0g-a.oregon-postgres.render.com',
+        'PORT': '5432',
     }
 }
-
 
 # Password validation
 # https://docs.djangoproject.com/en/5.0/ref/settings/#auth-password-validators
