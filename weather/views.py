@@ -48,7 +48,7 @@ def get_region_weather(request):
         requested_coordinate = coordinates.get(region)
 
     if requested_coordinate:
-        weather['tashkent'] = get_daily_weather_data(*requested_coordinate)
+        weather[region.lower()] = get_daily_weather_data(*requested_coordinate)
     else:
         for region, coordinate in coordinates.items():
             weather[region] = get_daily_weather_data(*coordinate)
