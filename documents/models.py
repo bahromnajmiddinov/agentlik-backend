@@ -6,6 +6,9 @@ from core.models import TimeStamps
 class DocumentCategory(TimeStamps):
     name = models.CharField(max_length=150)
 
+    def __str__(self):
+        return self.name
+
 
 class Document(TimeStamps):
     name = models.CharField(max_length=150)
@@ -14,3 +17,5 @@ class Document(TimeStamps):
     link = models.URLField()
     category = models.ManyToManyField(DocumentCategory)
 
+    def __str__(self):
+        return f'{self.name} | {self.issued_date} | {self.category}'
