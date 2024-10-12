@@ -22,6 +22,7 @@ from drf_spectacular.views import SpectacularAPIView, SpectacularSwaggerView
 
 api_v1_urlpatterns = [
     path('categories/', include('labeler.urls')),
+    path('management/', include('management.urls')),
     path('news/', include('news.urls')),
     path('documents/', include('documents.urls')),
     path('polls/', include('polls.urls')),

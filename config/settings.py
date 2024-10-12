@@ -46,6 +46,7 @@ INSTALLED_APPS = [
     'drf_spectacular',
     # local
     'users',
+    'management',
     'news',
     'documents',
     'polls',
