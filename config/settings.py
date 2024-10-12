@@ -47,6 +47,7 @@ INSTALLED_APPS = [
     'news',
     'documents',
     'polls',
+    'labeler',
 ]
 
 AUTH_USER_MODEL = 'users.CustomUser'

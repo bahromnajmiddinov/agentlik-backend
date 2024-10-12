@@ -7,3 +7,10 @@ class TimeStamps(models.Model):
 
     class Meta:
         abstract = True
+
+
+class BaseCategory(TimeStamps):
+    name = models.CharField(max_length=250)
+
+    class Meta:
+        abstract = True
