@@ -93,10 +93,10 @@ WSGI_APPLICATION = 'config.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'agentlikdb',
+        'NAME': 'agentlikdb_06ly',
         'USER': 'agentlik',
-        'PASSWORD': 'nlw3jWGxJkNqR3wTxVoeiS3DmWUz6Qj8',
-        'HOST': 'dpg-cs3rvkogph6c73c72p0g-a.oregon-postgres.render.com',
+        'PASSWORD': '5o6sMkOnsbXTcxYRwbvltJwe64IoLv5x',
+        'HOST': 'dpg-cs5l7823esus73b0kjf0-a.oregon-postgres.render.com',
         'PORT': '5432',
     }
 }
@@ -164,7 +164,7 @@ REST_FRAMEWORK = {
 }
 
 SPECTACULAR_SETTINGS = {
-    'TITLE': 'Your API Title',
-    'DESCRIPTION': 'A brief description of your API',
+    'TITLE': 'Yoshlar Ishlar Agentligi',
+    'DESCRIPTION': 'Sirdaryo Viloyati Yoshlar Ishlar Agentligi API',
     'VERSION': '1.0.0',
 }
