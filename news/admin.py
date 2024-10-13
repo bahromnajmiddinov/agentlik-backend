@@ -1,5 +1,16 @@
 from django.contrib import admin
 
-from .models import New
+from unfold.admin import ModelAdmin
 
-admin.site.register(New)
+from .models import New, NewCategory
+
+
+@admin.register(New)
+class NewAdmin(ModelAdmin):
+    # fields = '__all__'
+    readonly_fields = ['created', 'updated']
+
+
+@admin.register(NewCategory)
+class NewCategoryAdmin(ModelAdmin):
+    pass

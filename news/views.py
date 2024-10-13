@@ -17,6 +17,9 @@ class NewListView(ListAPIView):
 
 
 class NewDetailView(RetrieveAPIView):
+    '''
+    To retrieve about "Agentlik Haqida", send request with id of 36a3e12c-0470-40cd-a07d-18526e5f20f0
+    '''
     queryset = New.objects.all()
     serializer_class = NewSerializer
     lookup_field = 'id'
