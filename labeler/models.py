@@ -1,6 +1,10 @@
 from django.db import models
 
-from core.models import BaseCategory
+from core.models import BaseCategory, TimeStamps
+from documents.models import Document
+from management.models import Staff
+from news.models import New
+from polls.models import Poll
 
 
 class RootCategory(BaseCategory):
@@ -16,3 +20,36 @@ class SubCategory(BaseCategory):
 
     def __str__(self):
         return f'{self.name} | {self.parent_category}'
+
+
+class Page(TimeStamps):
+    sub_category = models.OneToOneField(SubCategory, on_delete=models.PROTECT, related_name='pages')
+    
+    news = models.ManyToManyField(New, blank=True, through='NewsThroughTable')
+    documents = models.ManyToManyField(Document, blank=True, through='DocumentsThroughTable')
+    staffs = models.ManyToManyField(Staff, blank=True, through='StaffsThroughTable')
+    polls = models.ManyToManyField(Poll, blank=True, through='PollsThroughTable')
+
+
+class CorePageThroughTable(TimeStamps):
+    page = models.ForeignKey(Page, on_delete=models.CASCADE)
+    
+    class Meta:
+        abstract = True
+
+
+class NewsThroughTable(CorePageThroughTable):
+    new = models.ForeignKey(New, on_delete=models.CASCADE)
+
+
+class DocumentsThroughTable(CorePageThroughTable):
+    document = models.ForeignKey(Document, on_delete=models.CASCADE)
+    
+    
+class StaffsThroughTable(CorePageThroughTable):
+    staff = models.ForeignKey(Staff, on_delete=models.CASCADE)
+    staff_category = models.CharField(max_length=300, blank=True, null=True)
+    
+
+class PollsThroughTable(CorePageThroughTable):
+    poll = models.ForeignKey(Poll, on_delete=models.CASCADE)

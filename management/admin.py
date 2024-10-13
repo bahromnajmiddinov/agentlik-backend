@@ -2,7 +2,7 @@ from django.contrib import admin
 
 from unfold.admin import ModelAdmin, TabularInline
 
-from .models import Staff, Role, AgencyCategory, AgencyCategoryThrouh
+from .models import Staff, Role
 
 
 @admin.register(Staff)
@@ -15,11 +15,11 @@ class RoleAdmin(ModelAdmin):
     pass
 
 
-class AgencyCategoryThrouhTabularInline(TabularInline):
-    model = AgencyCategoryThrouh
-    extra = 3
+# class AgencyCategoryThrouhTabularInline(TabularInline):
+#     model = AgencyCategoryThrouh
+#     extra = 3
 
 
-@admin.register(AgencyCategory)
-class AgencyCategoryAdmin(ModelAdmin):
-    inlines = [AgencyCategoryThrouhTabularInline]
+# @admin.register(AgencyCategory)
+# class AgencyCategoryAdmin(ModelAdmin):
+#     inlines = [AgencyCategoryThrouhTabularInline]
