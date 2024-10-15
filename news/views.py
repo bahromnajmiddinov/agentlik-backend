@@ -1,4 +1,5 @@
 from rest_framework.generics import ListAPIView, RetrieveAPIView
+from rest_framework.response import Response
 
 from .models import New, NewCategory
 from .serializers import NewSerializer, CategorySerializer
@@ -23,6 +24,13 @@ class NewDetailView(RetrieveAPIView):
     queryset = New.objects.all()
     serializer_class = NewSerializer
     lookup_field = 'id'
+
+    def retrieve(self, request, *args, **kwargs):
+        instance = self.get_object()
+        instance.views += 1
+        instance.save()
+        serializer = self.get_serializer(instance)
+        return Response(serializer.data)
 
 
 class CategoryListView(ListAPIView):
