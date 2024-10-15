@@ -30,6 +30,8 @@ class Page(TimeStamps):
     staffs = models.ManyToManyField(Staff, blank=True, through='StaffsThroughTable')
     polls = models.ManyToManyField(Poll, blank=True, through='PollsThroughTable')
 
+    views = models.PositiveIntegerField(default=0, editable=False)
+
 
 class CorePageThroughTable(TimeStamps):
     page = models.ForeignKey(Page, on_delete=models.CASCADE)

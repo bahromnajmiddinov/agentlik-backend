@@ -1,21 +1,6 @@
 from django.db import models
 
 from core.models import TimeStamps
-# from labeler.models import SubCategory
-
-
-# class AgencyCategory(models.Model):
-#     sub_category = models.OneToOneField('labeler.SubCategory', on_delete=models.SET_NULL, null=True, 
-#                                         related_name='agencies')
-#     staffs = models.ManyToManyField('Staff', blank=True, related_name='agency_categories', 
-#                                     through='AgencyCategoryThrouh')
-#     created_at = models.DateField(auto_now_add=True)
-
-
-# class AgencyCategoryThrouh(models.Model):
-#     staff = models.ForeignKey('Staff', on_delete=models.CASCADE)
-#     agency_category_name = models.CharField(max_length=300)
-#     agency_category = models.ForeignKey('AgencyCategory', on_delete=models.CASCADE)
 
 
 class Role(models.Model):
