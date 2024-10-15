@@ -1,5 +1,6 @@
 from rest_framework.generics import ListAPIView, RetrieveAPIView
 from rest_framework.response import Response
+from rest_framework.pagination import PageNumberPagination
 
 from django_filters.rest_framework import DjangoFilterBackend
 
@@ -8,11 +9,18 @@ from .serializers import NewSerializer, CategorySerializer
 from .filters import NewFilter
 
 
+class NewsPagination(PageNumberPagination):
+    page_size = 9
+    page_size_query_param = 'page_size'
+    max_page_size = 100
+
+
 class NewListView(ListAPIView):
     queryset = New.objects.filter(active=True)
     serializer_class = NewSerializer
     filter_backends = [DjangoFilterBackend]
     filterset_class = NewFilter
+    pagination_class = NewsPagination
 
     def get_queryset(self):
         queryset = super().get_queryset()
