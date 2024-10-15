@@ -17,7 +17,7 @@ class PollDetailView(RetrieveAPIView):
     serializer_class = PollSerializer
     lookup_field = 'id'
 
-    def post(self, request, id):
+    def put(self, request, id):
         choice_id = request.GET.get('choice_id', 0)
 
         poll = get_object_or_404(Poll, id=id)
