@@ -168,3 +168,30 @@ SPECTACULAR_SETTINGS = {
     'DESCRIPTION': 'Sirdaryo Viloyati Yoshlar Ishlar Agentligi API',
     'VERSION': '1.0.0',
 }
+
+# Unfold settings
+UNFOLD = {
+    "SITE_TITLE": "Yoshlar Ishlar Agentligi",
+    "SITE_HEADER": "Admin Panel",
+    "SITE_URL": "/api/v1/schema/swagger-ui/",
+
+    "SHOW_HISTORY": True, # show/hide "History" button, default: True
+    "SHOW_VIEW_ON_SITE": True, # show/hide "View on site" button, default: True
+    # "DASHBOARD_CALLBACK": "sample_app.dashboard_callback",
+    # "THEME": "dark", # Force theme: "dark" or "light". Will disable theme switcher
+
+    # "EXTENSIONS": {
+    #     "modeltranslation": {
+    #         "flags": {
+    #             "en": "🇬🇧",
+    #             "fr": "🇫🇷",
+    #             "nl": "🇧🇪",
+    #         },
+    #     },
+    # },
+    "SIDEBAR": {
+        "show_search": True,  # Search in applications and models names
+        "show_all_applications": True,  # Dropdown with all applications and models
+    },
+}
+
