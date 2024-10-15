@@ -1,13 +1,18 @@
 from rest_framework.generics import ListAPIView, RetrieveAPIView
 from rest_framework.response import Response
 
+from django_filters.rest_framework import DjangoFilterBackend
+
 from .models import New, NewCategory
 from .serializers import NewSerializer, CategorySerializer
+from .filters import NewFilter
 
 
 class NewListView(ListAPIView):
-    queryset = New.objects.all()
+    queryset = New.objects.filter(active=True)
     serializer_class = NewSerializer
+    filter_backends = [DjangoFilterBackend]
+    filterset_class = NewFilter
 
     def get_queryset(self):
         queryset = super().get_queryset()

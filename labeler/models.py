@@ -24,7 +24,8 @@ class SubCategory(BaseCategory):
 
 class Page(TimeStamps):
     sub_category = models.OneToOneField(SubCategory, on_delete=models.PROTECT, related_name='pages')
-    
+    text = models.TextField(blank=True, null=True)
+
     news = models.ManyToManyField(New, blank=True, through='NewsThroughTable')
     documents = models.ManyToManyField(Document, blank=True, through='DocumentsThroughTable')
     staffs = models.ManyToManyField(Staff, blank=True, through='StaffsThroughTable')
