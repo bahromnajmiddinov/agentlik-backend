@@ -1,6 +1,12 @@
 from rest_framework import serializers
 
-from .models import Staff, Role
+from .models import Staff, Role, Url
+
+
+class UrlSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Url
+        fields = '__all__'
 
 
 class RoleSerializer(serializers.ModelSerializer):
@@ -13,6 +19,7 @@ class RoleSerializer(serializers.ModelSerializer):
 
 class StaffSerializer(serializers.ModelSerializer):
     role = RoleSerializer(read_only=True)
+    urls = UrlSerializer(many=True, read_only=True)
 
     class Meta:
         model = Staff

@@ -33,6 +33,9 @@ class Page(TimeStamps):
 
     views = models.PositiveIntegerField(default=0, editable=False)
 
+    def __str__(self):
+        return f'{self.sub_category} | {self.views}'
+
 
 class CorePageThroughTable(TimeStamps):
     page = models.ForeignKey(Page, on_delete=models.CASCADE)
