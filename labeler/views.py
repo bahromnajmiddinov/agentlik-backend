@@ -1,6 +1,9 @@
 from rest_framework.generics import ListAPIView, RetrieveAPIView
 from rest_framework.response import Response
 
+from django_filters.rest_framework import DjangoFilterBackend
+
+from .filters import PageFilter
 from .models import RootCategory, SubCategory, Page
 from .serializers import RootCategorySerializer, SubCategorySerializer, PageSerializer
 
@@ -18,6 +21,8 @@ class SubCategoryListView(ListAPIView):
 class PageListView(ListAPIView):
     queryset = Page.objects.all()
     serializer_class = PageSerializer
+    filter_backends = [DjangoFilterBackend]
+    filterset_class = PageFilter
 
 
 class PageDetailView(RetrieveAPIView):
