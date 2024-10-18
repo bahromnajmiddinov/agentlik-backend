@@ -11,6 +11,7 @@ class TimeStamps(models.Model):
 
 class BaseCategory(TimeStamps):
     name = models.CharField(max_length=250)
+    slug = models.SlugField(unique=True)
 
     class Meta:
         abstract = True

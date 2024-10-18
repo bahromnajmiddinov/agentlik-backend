@@ -2,12 +2,15 @@ from django.db import models
 
 import uuid
 
-from core.models import TimeStamps
+from core.models import TimeStamps, BaseCategory
 from users.models import CustomUser
 
 
-class NewCategory(TimeStamps):
-    name = models.CharField(max_length=150)
+class NewCategory(BaseCategory):
+
+    def __str__(self):
+        return self.name
+
 
 class New(TimeStamps):
     id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
