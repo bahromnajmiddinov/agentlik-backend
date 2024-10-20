@@ -6,10 +6,19 @@ from core.models import TimeStamps, BaseCategory
 from users.models import CustomUser
 
 
+def new_image_path(instance, filename):
+    return f'news/{instance.id}/images/{filename}'
+
+
 class NewCategory(BaseCategory):
 
     def __str__(self):
         return self.name
+    
+
+class NewImage(models.Model):
+    file = models.ImageField(upload_to=new_image_path)
+    new = models.ForeignKey('New', on_delete=models.CASCADE, related_name='images')
 
 
 class New(TimeStamps):

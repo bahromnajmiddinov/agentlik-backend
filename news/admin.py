@@ -1,8 +1,13 @@
 from django.contrib import admin
 
-from unfold.admin import ModelAdmin
+from unfold.admin import ModelAdmin, TabularInline
 
-from .models import New, NewCategory
+from .models import New, NewCategory, NewImage
+
+
+class NewImageInline(TabularInline):
+    model = NewImage
+    extra = 3
 
 
 @admin.register(New)
@@ -11,6 +16,7 @@ class NewAdmin(ModelAdmin):
     readonly_fields = ['created', 'updated', 'views']
     list_display = ['title', 'active', 'age_limit', 'views']
     search_fields = ['title']
+    inlines = [NewImageInline]
 
 
 @admin.register(NewCategory)
