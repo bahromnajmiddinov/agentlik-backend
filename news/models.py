@@ -11,6 +11,7 @@ def new_image_path(instance, filename):
 
 
 class NewCategory(BaseCategory):
+    views = models.PositiveBigIntegerField(default=0)
 
     def __str__(self):
         return self.name

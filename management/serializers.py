@@ -20,7 +20,11 @@ class RoleSerializer(serializers.ModelSerializer):
 class StaffSerializer(serializers.ModelSerializer):
     role = RoleSerializer(read_only=True)
     urls = UrlSerializer(many=True, read_only=True)
+    get_full_name = serializers.SerializerMethodField()
 
     class Meta:
         model = Staff
         fields = '__all__'
+
+    def get_full_name(self, obj):
+        return obj.get_full_name

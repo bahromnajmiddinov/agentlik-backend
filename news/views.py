@@ -24,16 +24,18 @@ class NewListView(ListAPIView):
 
     def get_queryset(self):
         queryset = super().get_queryset()
-        category = self.request.query_params.get('category')
+        category = self.request.query_params.get('category_slug')
         if category:
             queryset = queryset.filter(category=category)
+            new_category = NewCategory.objects.filter(slug=self.request.query_params.get('category_slug')).first()
+            if new_category.exists():
+                new_category.views += 1
+                new_category.save()
+
         return queryset
 
 
 class NewDetailView(RetrieveAPIView):
-    '''
-    To retrieve about "Agentlik Haqida", send request with id of 36a3e12c-0470-40cd-a07d-18526e5f20f0
-    '''
     queryset = New.objects.all()
     serializer_class = NewSerializer
     lookup_field = 'id'
