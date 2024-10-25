@@ -1,3 +1,4 @@
+from attr.validators import max_len
 from django.db import models
 
 from core.models import BaseCategory, TimeStamps
@@ -22,11 +23,22 @@ class SubCategory(BaseCategory):
         return f'{self.name} | {self.parent_category}'
 
 
+class CustomTable(models.Model):
+    title = models.CharField(max_length=500)
+
+
+class CustomTableField(models.Model):
+    title = models.CharField(max_length=75)
+    text = models.CharField(max_length=75)
+    link = models.URLField(null=True, blank=True, help_text='If text is link then add url here')
+    table = models.ForeignKey(CustomTable, on_delete=models.CASCADE)
+
+
 class Page(TimeStamps):
     sub_category = models.OneToOneField(SubCategory, on_delete=models.PROTECT, related_name='pages')
     title = models.CharField(max_length=150, blank=True, null=True)
     text = models.TextField(blank=True, null=True)
-
+    tables = models.ManyToManyField(CustomTable, blank=True)
     news = models.ManyToManyField(New, blank=True, through='NewsThroughTable')
     documents = models.ManyToManyField(Document, blank=True, through='DocumentsThroughTable')
     staffs = models.ManyToManyField(Staff, blank=True, through='StaffsThroughTable')

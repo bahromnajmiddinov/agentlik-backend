@@ -2,7 +2,10 @@ from django.contrib import admin
 
 from unfold.admin import ModelAdmin, TabularInline
 
-from .models import RootCategory, SubCategory, Page, DocumentsThroughTable, NewsThroughTable, StaffsThroughTable, PollsThroughTable
+from .models import (RootCategory, SubCategory, Page,
+                     DocumentsThroughTable, NewsThroughTable,
+                     StaffsThroughTable, PollsThroughTable,
+                     CustomTable, CustomTableField)
 
 
 @admin.register(RootCategory)
@@ -46,3 +49,13 @@ class PollsInline(TabularInline):
 class PageAdmin(ModelAdmin):
     inlines = [NewsInline, DocumentsInline, StaffsInline, PollsInline]
     list_filter = ['sub_category', 'sub_category__parent_category']
+
+
+class CustomTableFieldInline(TabularInline):
+    model = CustomTableField
+    extra = 1
+
+
+@admin.register(CustomTable)
+class CustomTableAdmin(ModelAdmin):
+    inlines = [CustomTableFieldInline]
