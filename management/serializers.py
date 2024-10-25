@@ -20,7 +20,9 @@ class RoleSerializer(serializers.ModelSerializer):
 class StaffSerializer(serializers.ModelSerializer):
     role = RoleSerializer(read_only=True)
     urls = UrlSerializer(many=True, read_only=True)
+    full_name = serializers.CharField(source='get_full_name')
 
     class Meta:
         model = Staff
         fields = '__all__'
+        extra_fields = ['full_name']

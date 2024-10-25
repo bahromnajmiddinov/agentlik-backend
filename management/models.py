@@ -3,6 +3,10 @@ from django.db import models
 from core.models import TimeStamps
 
 
+def staff_image_path(instance, filename):
+    return f'staffs/{instance.get_full_name}/images/{filename}'
+
+
 class Url(models.Model):
     app_name = models.CharField(max_length=20)
     app_url = models.URLField()
@@ -23,6 +27,7 @@ class Staff(TimeStamps):
     first_name = models.CharField(max_length=50)
     last_name = models.CharField(max_length=50)
     father_name = models.CharField(max_length=100)
+    avatar = models.ImageField(upload_to=staff_image_path, default='management/images/default.png')
     role = models.OneToOneField(Role, on_delete=models.SET_NULL, null=True)
     phone_number = models.PositiveBigIntegerField()
     email = models.EmailField()

@@ -21,5 +21,6 @@ class NewAdmin(ModelAdmin):
 
 @admin.register(NewCategory)
 class NewCategoryAdmin(ModelAdmin):
-    list_display = ['name', 'slug']
+    list_display = ['name', 'slug', 'views']
+    readonly_fields = ['views']
     prepopulated_fields = {'slug': ('name',)}
