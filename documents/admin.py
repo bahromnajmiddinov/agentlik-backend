@@ -1,7 +1,7 @@
 from django.contrib import admin
 from unfold.admin import ModelAdmin
 
-from .models import Document, DocumentCategory
+from .models import Document, DocumentCategory, SimpleDocument
 
 
 @admin.register(Document)
@@ -16,3 +16,8 @@ class DocumentCategoryAdmin(ModelAdmin):
     readonly_fields = ['created', 'updated']
     list_display = ['name']
     search_fields = ['name', 'number', 'issued_date', 'category']
+
+
+@admin.register(SimpleDocument)
+class DocumentSimpleAdmin(ModelAdmin):
+    readonly_fields = ['created', 'updated']

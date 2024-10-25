@@ -1,8 +1,7 @@
-from attr.validators import max_len
 from django.db import models
 
 from core.models import BaseCategory, TimeStamps
-from documents.models import Document
+from documents.models import Document, SimpleDocument
 from management.models import Staff
 from news.models import New
 from polls.models import Poll
@@ -41,6 +40,7 @@ class Page(TimeStamps):
     tables = models.ManyToManyField(CustomTable, blank=True)
     news = models.ManyToManyField(New, blank=True, through='NewsThroughTable')
     documents = models.ManyToManyField(Document, blank=True, through='DocumentsThroughTable')
+    simple_documents = models.ManyToManyField(SimpleDocument, blank=True)
     staffs = models.ManyToManyField(Staff, blank=True, through='StaffsThroughTable')
     polls = models.ManyToManyField(Poll, blank=True, through='PollsThroughTable')
 
@@ -63,7 +63,7 @@ class NewsThroughTable(CorePageThroughTable):
 
 class DocumentsThroughTable(CorePageThroughTable):
     document = models.ForeignKey(Document, on_delete=models.CASCADE)
-    
+
     
 class StaffsThroughTable(CorePageThroughTable):
     staff = models.ForeignKey(Staff, on_delete=models.CASCADE)

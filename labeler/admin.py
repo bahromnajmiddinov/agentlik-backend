@@ -6,6 +6,7 @@ from .models import (RootCategory, SubCategory, Page,
                      DocumentsThroughTable, NewsThroughTable,
                      StaffsThroughTable, PollsThroughTable,
                      CustomTable, CustomTableField)
+from documents.models import SimpleDocument
 
 
 @admin.register(RootCategory)
@@ -31,7 +32,12 @@ class DocumentsInline(TabularInline):
     model = DocumentsThroughTable
     extra = 3
     autocomplete_fields = ['document']
-    
+
+
+class SimpleDocumentInline(TabularInline):
+    model = SimpleDocument
+    extra = 3
+
 
 class StaffsInline(TabularInline):
     model = StaffsThroughTable
