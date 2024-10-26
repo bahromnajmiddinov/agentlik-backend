@@ -21,6 +21,7 @@ class SimpleDocument(TimeStamps):
     name = models.CharField(max_length=150)
     link = models.URLField()
     category = models.ManyToManyField(DocumentCategory)
+    file_type = models.CharField(max_length=10, blank=True, null=True)
 
     def __str__(self):
         return self.name
@@ -34,6 +35,7 @@ class Document(TimeStamps):
     issued_date = models.DateField(null=True, blank=True)
     number = models.PositiveSmallIntegerField(null=True, blank=True)
     document_number = models.CharField(max_length=25, null=True, blank=True)
+    file_type = models.CharField(max_length=10, blank=True, null=True)
 
     def __str__(self):
         return f'{self.name} | {self.issued_date}'
