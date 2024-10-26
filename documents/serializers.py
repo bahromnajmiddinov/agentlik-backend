@@ -22,5 +22,5 @@ class SimpleDocumentSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = SimpleDocument
-        fields = '__all_-'
+        fields = '__all__'
 
