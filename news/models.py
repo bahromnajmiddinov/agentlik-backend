@@ -34,4 +34,8 @@ class New(TimeStamps):
     views = models.PositiveIntegerField(default=0)
 
     def __str__(self):
-        return self.title
+        categories = []
+        for category in self.category.all():
+            categories.append(category.name)
+
+        return f'{self.title} | {categories}'
