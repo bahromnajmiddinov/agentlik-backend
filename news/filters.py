@@ -9,6 +9,8 @@ class NewFilter(filters.FilterSet):
     search = filters.CharFilter(method='filter_by_title_and_text')
     created = filters.DateFilter(field_name='created')
     updated = filters.DateFilter(field_name='updated')
+    last_news = filters.BooleanFilter(method='filter_last_news')
+    limit = filters.NumberFilter(method='filter_limit')
 
     class Meta:
         model = New
@@ -18,3 +20,14 @@ class NewFilter(filters.FilterSet):
         return queryset.filter(
             Q(title__icontains=value) | Q(text__icontains=value)
         )
+    
+    def filter_last_news(self, queryset, name, value):
+        if value:
+            return queryset.filter(active=True).order_by('-created')
+        return queryset
+    
+    def filter_limit(self, queryset, name, value):
+        if value:
+            return queryset[:value]
+        return queryset
+        
