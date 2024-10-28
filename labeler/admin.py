@@ -5,7 +5,7 @@ from unfold.admin import ModelAdmin, TabularInline
 from .models import (RootCategory, SubCategory, Page,
                      DocumentsThroughTable, NewsThroughTable,
                      StaffsThroughTable, PollsThroughTable,
-                     CustomTable, CustomTableField)
+                     CustomTable, CustomTableField, PageImage)
 from documents.models import SimpleDocument
 
 
@@ -26,34 +26,45 @@ class NewsInline(TabularInline):
     model = NewsThroughTable
     extra = 3
     autocomplete_fields = ['new']
+    tab = True
 
 
 class DocumentsInline(TabularInline):
     model = DocumentsThroughTable
     extra = 3
     autocomplete_fields = ['document']
+    tab = True
 
 
 class SimpleDocumentInline(TabularInline):
     model = SimpleDocument
     extra = 3
+    tab = True
 
 
 class StaffsInline(TabularInline):
     model = StaffsThroughTable
     extra = 3
     autocomplete_fields = ['staff']
+    tab = True
 
 
 class PollsInline(TabularInline):
     model = PollsThroughTable
     extra = 3
     autocomplete_fields = ['poll']
+    tab = True
+
+
+class PageImageInline(TabularInline):
+    model = PageImage
+    extra = 1
+    tab = True
 
 
 @admin.register(Page)
 class PageAdmin(ModelAdmin):
-    inlines = [NewsInline, DocumentsInline, StaffsInline, PollsInline]
+    inlines = [NewsInline, DocumentsInline, StaffsInline, PollsInline, PageImageInline]
     list_filter = ['sub_category', 'sub_category__parent_category']
 
 
