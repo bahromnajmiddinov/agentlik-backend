@@ -7,6 +7,10 @@ from news.models import New
 from polls.models import Poll
 
 
+def page_image_path(instance, filename):
+    return f'labeler/pages/{instance.id}/images/{filename}'
+
+
 class RootCategory(BaseCategory):
     name = models.CharField(max_length=50)
 
@@ -72,3 +76,11 @@ class StaffsThroughTable(CorePageThroughTable):
 
 class PollsThroughTable(CorePageThroughTable):
     poll = models.ForeignKey(Poll, on_delete=models.CASCADE)
+
+
+class PageImage(models.Model):
+    image = models.ImageField(upload_to=page_image_path)
+    page = models.ForeignKey(Page, on_delete=models.CASCADE)
+    
+    def __str__(self):
+        return f'{self.image} | {self.page}'
