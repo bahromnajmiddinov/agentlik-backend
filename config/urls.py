@@ -18,6 +18,7 @@ from django.contrib import admin
 from django.urls import path, include
 from django.conf import settings
 from django.conf.urls.static import static
+from django.views.i18n import set_language
 
 from drf_spectacular.views import SpectacularAPIView, SpectacularSwaggerView
 
@@ -36,6 +37,7 @@ api_v1_urlpatterns = [
 
 urlpatterns = [
     path('admin/', admin.site.urls),
+    path('set_language/', set_language, name='set_language'),
     path('api/v1/', include(api_v1_urlpatterns)),
 ]
 

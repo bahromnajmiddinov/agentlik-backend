@@ -135,6 +135,11 @@ USE_I18N = True
 
 USE_TZ = True
 
+LANGUAGES = [
+    ('en', 'English'),
+    ('uz', 'Uzbek'),
+]
+
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/5.0/howto/static-files/
@@ -201,15 +206,14 @@ UNFOLD = {
     # "DASHBOARD_CALLBACK": "sample_app.dashboard_callback",
     # "THEME": "dark", # Force theme: "dark" or "light". Will disable theme switcher
 
-    # "EXTENSIONS": {
-    #     "modeltranslation": {
-    #         "flags": {
-    #             "en": "🇬🇧",
-    #             "fr": "🇫🇷",
-    #             "nl": "🇧🇪",
-    #         },
-    #     },
-    # },
+    "EXTENSIONS": {
+        "modeltranslation": {
+            "flags": {
+                "en": "🇬🇧",
+                "uz": "🇺🇿",
+            },
+        },
+    },
     "SIDEBAR": {
         "show_search": True,  # Search in applications and models names
         "show_all_applications": True,  # Dropdown with all applications and models
