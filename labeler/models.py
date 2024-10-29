@@ -64,18 +64,34 @@ class CorePageThroughTable(TimeStamps):
 class NewsThroughTable(CorePageThroughTable):
     new = models.ForeignKey(New, on_delete=models.CASCADE)
 
+    class Meta:
+        verbose_name = 'Page New'
+        verbose_name_plural = 'Page News'
+
 
 class DocumentsThroughTable(CorePageThroughTable):
     document = models.ForeignKey(Document, on_delete=models.CASCADE)
+
+    class Meta:
+        verbose_name = 'Page Document'
+        verbose_name_plural = 'Page Documents'
 
     
 class StaffsThroughTable(CorePageThroughTable):
     staff = models.ForeignKey(Staff, on_delete=models.CASCADE)
     staff_category = models.CharField(max_length=300, blank=True, null=True)
+
+    class Meta:
+        verbose_name = 'Page Staff'
+        verbose_name_plural = 'Page Staffs'
     
 
 class PollsThroughTable(CorePageThroughTable):
     poll = models.ForeignKey(Poll, on_delete=models.CASCADE)
+
+    class Meta:
+        verbose_name = 'Page Poll'
+        verbose_name_plural = 'Page Polls'
 
 
 class PageImage(models.Model):
