@@ -28,6 +28,9 @@ class SubCategory(BaseCategory):
 
 class CustomTable(models.Model):
     title = models.CharField(max_length=500)
+    
+    def __str__(self):
+        return self.title
 
 
 class CustomTableField(models.Model):
