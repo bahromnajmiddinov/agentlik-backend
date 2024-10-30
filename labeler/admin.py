@@ -79,6 +79,6 @@ class CustomTableAdmin(ModelAdmin):
     inlines = [CustomTableFieldInline]
     
 
-@admin.register(CustomTableFieldHead)
+@admin.register(CustomTableFieldHead)   
 class CustomTableFieldHeadAdmin(ModelAdmin):
     pass
