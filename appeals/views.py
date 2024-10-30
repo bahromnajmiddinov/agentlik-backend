@@ -1,0 +1,37 @@
+from django.db import models
+
+from rest_framework.views import APIView
+from rest_framework.response import Response
+from rest_framework import status
+
+from .serializers import AppealSerializer
+from .models import Appeal
+
+
+class ApealsStatistcsAPIView(APIView):
+    queryset = Appeal.objects.all() 
+    serializer_class = AppealSerializer
+    
+    def get(self, request, *args, **kwargs):
+        appeal_counts = Appeal.objects.values('status').annotate(count=models.Count('id'))
+        data = {
+            'Kelib tushgan murojaatlar': Appeal.objects.count(),
+            'Jarayonda': sum(item['count'] for item in appeal_counts if item['status'] == 'JR'),
+            'Ijro holati': {
+                'Ijobiy hal qilinga': sum(item['count'] for item in appeal_counts if item['status'] == 'HQ'),
+                'Huquqiy ma\'lumot berilgan': sum(item['count'] for item in appeal_counts if item['status'] == 'MB'),
+                'Tushuntirish berilgan': sum(item['count'] for item in appeal_counts if item['status'] == 'TB'),
+                'Rad etilgan': sum(item['count'] for item in appeal_counts if item['status'] == 'RE'),
+                'Boshqa holatlar bo\'yicha': sum(item['count'] for item in appeal_counts if item['status'] == 'BH'),
+            }
+        }
+        return Response(data, status=status.HTTP_200_OK)
+
+    def post(self, request, *args, **kwargs):
+        serializer = AppealSerializer(data=request.data)
+        if serializer.is_valid():
+            serializer.save()
+            return Response(serializer.data, status=status.HTTP_201_CREATED)
+        
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+    
