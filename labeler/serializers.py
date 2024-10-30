@@ -28,7 +28,7 @@ class PageImageSetSerializer(serializers.ModelSerializer):
 
 
 class PageSerializer(serializers.ModelSerializer):
-    table = CustomTableSerializer(many=True, read_only=True)
+    tables = CustomTableSerializer(many=True, read_only=True)
     news = NewSerializer(many=True, read_only=True)
     documents = DocumentSerializer(many=True, read_only=True)
     simple_documents = SimpleDocumentSerializer(many=True, read_only=True)
