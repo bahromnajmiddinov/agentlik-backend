@@ -33,7 +33,15 @@ class CustomTable(models.Model):
         return self.title
 
 
+class CustomTableFieldHead(models.Model):
+    title = models.CharField(max_length=75)
+    
+    def __str__(self):
+        return self.title
+
+
 class CustomTableField(models.Model):
+    head = models.ForeignKey(CustomTableFieldHead, on_delete=models.PROTECT, null=True, blank=True)
     title = models.CharField(max_length=75)
     text = models.CharField(max_length=75)
     link = models.URLField(null=True, blank=True, help_text='If text is link then add url here')

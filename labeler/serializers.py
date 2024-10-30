@@ -1,13 +1,20 @@
 from rest_framework import serializers
 
-from .models import RootCategory, SubCategory, Page, CustomTable, CustomTableField, PageImage
+from .models import RootCategory, SubCategory, Page, CustomTable, CustomTableField, PageImage, CustomTableFieldHead
 from news.serializers import NewSerializer
 from documents.serializers import DocumentSerializer, SimpleDocumentSerializer
 from polls.serializers import PollSerializer
 from management.serializers import StaffSerializer
 
 
+class CustomTableFieldHeadSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = CustomTableFieldHead
+        fields = '__all__'
+
+
 class CustomTableFieldSerializer(serializers.ModelSerializer):
+    head = CustomTableFieldHeadSerializer(read_only=True)
     class Meta:
         model = CustomTableField
         fields = '__all__'

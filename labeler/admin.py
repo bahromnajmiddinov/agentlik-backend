@@ -5,7 +5,8 @@ from unfold.admin import ModelAdmin, TabularInline
 from .models import (RootCategory, SubCategory, Page,
                      DocumentsThroughTable, NewsThroughTable,
                      StaffsThroughTable, PollsThroughTable,
-                     CustomTable, CustomTableField, PageImage)
+                     CustomTable, CustomTableField, PageImage,
+                     CustomTableFieldHead)
 from documents.models import SimpleDocument
 
 
@@ -76,3 +77,8 @@ class CustomTableFieldInline(TabularInline):
 @admin.register(CustomTable)
 class CustomTableAdmin(ModelAdmin):
     inlines = [CustomTableFieldInline]
+    
+
+@admin.register(CustomTableFieldHead)
+class CustomTableFieldHeadAdmin(ModelAdmin):
+    pass
