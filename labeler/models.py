@@ -5,6 +5,7 @@ from documents.models import Document, SimpleDocument
 from management.models import Staff
 from news.models import New
 from polls.models import Poll
+from appeals.models import CommonQuestion
 
 
 def page_image_path(instance, filename):
@@ -58,6 +59,7 @@ class Page(TimeStamps):
     simple_documents = models.ManyToManyField(SimpleDocument, blank=True)
     staffs = models.ManyToManyField(Staff, blank=True, through='StaffsThroughTable')
     polls = models.ManyToManyField(Poll, blank=True, through='PollsThroughTable')
+    common_questions = models.ManyToManyField(CommonQuestion, blank=True, through='CommonQuestionThroughTable')
 
     views = models.PositiveIntegerField(default=0, editable=False)
 
@@ -103,6 +105,14 @@ class PollsThroughTable(CorePageThroughTable):
     class Meta:
         verbose_name = 'Page Poll'
         verbose_name_plural = 'Page Polls'
+
+
+class CommonQuestionThroughTable(CorePageThroughTable):
+    question = models.ForeignKey(CommonQuestion, on_delete=models.CASCADE)
+    
+    class Meta:
+        verbose_name = 'Page Common Question'
+        verbose_name_plural = 'Page Common Questions'
 
 
 class PageImage(models.Model):

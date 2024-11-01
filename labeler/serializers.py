@@ -5,6 +5,7 @@ from news.serializers import NewSerializer
 from documents.serializers import DocumentSerializer, SimpleDocumentSerializer
 from polls.serializers import PollSerializer
 from management.serializers import StaffSerializer
+from appeals.serializers import CommonQuestionSerializer
 
 
 class CustomTableFieldHeadSerializer(serializers.ModelSerializer):
@@ -42,6 +43,7 @@ class PageSerializer(serializers.ModelSerializer):
     staffs = StaffSerializer(many=True, read_only=True)
     polls = PollSerializer(many=True, read_only=True)
     pageimage_set = PageImageSetSerializer(many=True, read_only=True)
+    common_questions = CommonQuestionSerializer(many=True, read_only=True)
 
     class Meta:
         model = Page

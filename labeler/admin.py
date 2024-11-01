@@ -6,7 +6,7 @@ from .models import (RootCategory, SubCategory, Page,
                      DocumentsThroughTable, NewsThroughTable,
                      StaffsThroughTable, PollsThroughTable,
                      CustomTable, CustomTableField, PageImage,
-                     CustomTableFieldHead)
+                     CustomTableFieldHead, CommonQuestionThroughTable)
 from documents.models import SimpleDocument
 
 
@@ -63,9 +63,15 @@ class PageImageInline(TabularInline):
     tab = True
 
 
+class CommonQuestionInline(TabularInline):
+    model = CommonQuestionThroughTable
+    extra = 3
+    tab = True
+
+
 @admin.register(Page)
 class PageAdmin(ModelAdmin):
-    inlines = [NewsInline, DocumentsInline, StaffsInline, PollsInline, PageImageInline]
+    inlines = [NewsInline, DocumentsInline, StaffsInline, PollsInline, PageImageInline, CommonQuestionInline]
     list_filter = ['sub_category', 'sub_category__parent_category']
 
 
