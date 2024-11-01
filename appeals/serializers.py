@@ -13,4 +13,4 @@ class CommonQuestionSerializer(serializers.ModelSerializer):
     class Meta:
         model = CommonQuestion
         fields = ['title', 'text']
-        readonly_fields = ['created', 'updated']
+        read_only_fields = ['created', 'updated']
