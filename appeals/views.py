@@ -6,7 +6,7 @@ from rest_framework.response import Response
 from rest_framework import status
 
 from .serializers import AppealSerializer
-from .models import Appeal
+from .models import Appeal, AppealStatisticPage
 
 
 class ApealsStatistcsAPIView(APIView):
@@ -15,6 +15,14 @@ class ApealsStatistcsAPIView(APIView):
     permission_classes = [AllowAny]
     
     def get(self, request, *args, **kwargs):
+        # Update page views
+        if not AppealStatisticPage.objects.exists():
+            AppealStatisticPage.objects.create(views=1)
+        else:
+            page = AppealStatisticPage.objects.all()[0]
+            page.views += 1
+            page.save()
+
         appeal_counts = Appeal.objects.values('status').annotate(count=models.Count('id'))
         data = {
             'Kelib tushgan murojaatlar': Appeal.objects.count(),
@@ -25,7 +33,9 @@ class ApealsStatistcsAPIView(APIView):
                 'Tushuntirish berilgan': sum(item['count'] for item in appeal_counts if item['status'] == 'TB'),
                 'Rad etilgan': sum(item['count'] for item in appeal_counts if item['status'] == 'RE'),
                 'Boshqa holatlar bo\'yicha': sum(item['count'] for item in appeal_counts if item['status'] == 'BH'),
-            }
+            },
+            'updated': Appeal.objects.last().updated,
+            'views': AppealStatisticPage.objects.all()[0].views,
         }
         return Response(data, status=status.HTTP_200_OK)
 

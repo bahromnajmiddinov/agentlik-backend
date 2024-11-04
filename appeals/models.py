@@ -33,3 +33,7 @@ class CommonQuestion(TimeStamps):
     
     def __str__(self):
         return self.title
+
+
+class AppealStatisticPage(models.Model):
+    views = models.PositiveBigIntegerField(default=0)
