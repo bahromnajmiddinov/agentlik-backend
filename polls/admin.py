@@ -7,7 +7,8 @@ from .models import Poll, Choice
 class ChoiceInline(TabularInline):
     model = Choice
     extra = 3
-    fields = ['answer']
+    fields = ['answer', 'clicks']
+    readonly_fields = ['clicks']
 
 
 @admin.register(Poll)
