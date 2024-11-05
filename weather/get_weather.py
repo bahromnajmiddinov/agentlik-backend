@@ -14,7 +14,8 @@ def get_daily_weather_data(latitude, longitude):
     cache_key = f"daily_weather_data_{latitude}_{longitude}"
 
     # Try to get cached data
-    response = cache.get(cache_key)
+    # response = cache.get(cache_key)
+    response = None
     if response is None:
         # If cache is empty, make the API request for daily data
         url = "https://api.open-meteo.com/v1/forecast"
@@ -22,13 +23,13 @@ def get_daily_weather_data(latitude, longitude):
             "latitude": latitude,
             "longitude": longitude,
             "daily": "temperature_2m_max,temperature_2m_min",
-            "timezone": "auto"
+            "timezone": "auto",
+            "current": "weather_code",
         }
 
         # Fetch the weather data using Open-Meteo API
         responses = openmeteo.weather_api(url, params=params)
         response = responses[0]
-
         # Cache the response for 1 hour (3600 seconds)
         cache.set(cache_key, response, timeout=3600)
 
@@ -42,6 +43,7 @@ def get_daily_weather_data(latitude, longitude):
     daily = response.Daily()
     daily_temperature_max = daily.Variables(0).ValuesAsNumpy()
     daily_temperature_min = daily.Variables(1).ValuesAsNumpy()
+    current_weather_code = response.Current().Variables(0).Value()
 
     # Create pandas DataFrame for daily data
     daily_data = {
@@ -52,7 +54,8 @@ def get_daily_weather_data(latitude, longitude):
             inclusive="left"
         ),
         "temperature_max": daily_temperature_max,
-        "temperature_min": daily_temperature_min
+        "temperature_min": daily_temperature_min,
+        "current_weather_code": current_weather_code,
     }
 
     daily_dataframe = pd.DataFrame(data=daily_data)

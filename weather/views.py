@@ -1,3 +1,5 @@
+from django.templatetags.static import static
+
 from rest_framework.response import Response
 from rest_framework.permissions import AllowAny
 from rest_framework.decorators import api_view, permission_classes
@@ -44,6 +46,37 @@ def get_region_weather(request):
         'termez':    [37.2245, 67.2783],
     }
 
+    eather_images = {
+        0: static('weather/imgs/clear_sky.png'),
+        1: static('weather/imgs/partly_cloudy.png'),
+        2: static('weather/imgs/partly_cloudy2.png'),
+        3: static('weather/imgs/overcast.png'),
+        45: static('weather/imgs/fog.png'),
+        48: static('weather/imgs/fog2.png'),
+        51: static('weather/imgs/light_drizzle.png'),
+        53: static('weather/imgs/moderate_drizzle.png'),
+        55: static('weather/imgs/heavy_drizzle.png'),
+        56: static('weather/imgs/light_freezing_drizzle.png'),
+        57: static('weather/imgs/heavy_freezing_drizzle.png'),
+        61: static('weather/imgs/light_rain.png'),
+        63: static('weather/imgs/moderate_rain.png'),
+        65: static('weather/imgs/heavy_rain.png'),
+        66: static('weather/imgs/light_freezing_rain.png'),
+        67: static('weather/imgs/heavy_freezing_rain.png'),
+        71: static('weather/imgs/light_snow.png'),
+        73: static('weather/imgs/moderate_snow.png'),
+        75: static('weather/imgs/heavy_snow.png'),
+        77: static('weather/imgs/snow_grains.png'),
+        80: static('weather/imgs/light_rain_showers.png'),
+        81: static('weather/imgs/moderate_rain_showers.png'),
+        82: static('weather/imgs/heavy_rain_showers.png'),
+        85: static('weather/imgs/light_snow_showers.png'),
+        86: static('weather/imgs/heavy_snow_showers.png'),
+        95: static('weather/imgs/thunderstorm.png'),
+        96: static('weather/imgs/thunderstorm_light_hail.png'),
+        99: static('weather/imgs/thunderstorm_heavy_hail.png'),
+    }
+
     if region and region.lower() in coordinates:
         requested_coordinate = coordinates.get(region)
 
@@ -52,5 +85,9 @@ def get_region_weather(request):
     else:
         for region, coordinate in coordinates.items():
             weather[region] = get_daily_weather_data(*coordinate)
+
+    for weather_code in weather.values():
+        for ind, code in enumerate(weather_code['current_weather_code']):
+            weather_code['current_weather_code'][ind] = {'code': code, 'weather': eather_images.get(code)}
 
     return Response(weather)
