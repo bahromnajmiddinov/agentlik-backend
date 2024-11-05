@@ -31,7 +31,7 @@ def get_daily_weather_data(latitude, longitude):
         responses = openmeteo.weather_api(url, params=params)
         response = responses[0]
         # Cache the response for 1 hour (3600 seconds)
-        cache.set(cache_key, response, timeout=3600)
+        # cache.set(cache_key, response, timeout=3600)
 
     # Process the response data
     print(f"Coordinates {response.Latitude()}°N {response.Longitude()}°E")
